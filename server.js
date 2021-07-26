@@ -124,8 +124,8 @@ function addEmployee() {
     .then((answer) => {
         connection.query(`INSERT INTO employee(first_name, last_name, role_id)
         VALUES("${answer.first_name}", "${answer.last_name}", ${answer.role_id})`, (err,res) => {
-            if (err) throw err:
-            consol.log(res);
+            if (err) throw err;
+            console.log(res);
             start();
         })
     })
@@ -141,4 +141,4 @@ function viewDepartments() {
     })
 };
 
-function updateEmployeeRole()
+// function updateEmployeeRole()
