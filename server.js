@@ -88,13 +88,13 @@ function addRole() {
     },
     {
         type: 'input',
-        name: 'deparment_id',
+        name: 'department_id',
         message: "What is the department Id?"
     },     
     ])
     .then((answer) => {
         connection.query(`INSERT INTO role(title, salary, department_id)
-        VALUES("${answer.title}", "${answer.salary}", "${answer.department_id}")`, (err,res) => {
+        VALUES("${answer.title}", ${answer.salary}, ${answer.department_id})`, (err,res) => {
             if (err) throw err;
             console.log(res);
             start();
@@ -102,6 +102,14 @@ function addRole() {
     })
 };
 
-function viewDepartments() {
 
-}
+
+function viewDepartments() {
+    connection.query(`SELECT * FROM department`, (err,res) => {
+        if (err) throw err;
+        console.table(res);
+        start();
+    })
+};
+
+function updateEmployeeRole
