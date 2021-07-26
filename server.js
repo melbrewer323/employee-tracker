@@ -17,41 +17,91 @@ connection.connect((err) => {
 
 const start = () => {
     inquirer
-    .prompt([
-        {
+    .prompt({
             type: 'list',
             name: 'toDo',
             message: "What would you like to do?",
-            choices: ["Add department", "Add role", "Add Employee", "View departments", "View roles", "View employees", "Update employee role", "Exit"]
-        },
-     
-    ])
-    .then((anser) => {
-        switch (anser.action) {
-            case 'Add department':
+            choices: ["add department", "add role", "add employee", "view departments", "view roles", "view employees", "update employee role", "exit",
+            ], 
+    })
+    .then((answer) => {
+        switch (answer.toDo) {
+            case 'add department':
                 addDepartment();
                 break;
-            case 'Add role':
+            case 'add role':
                 addRole();
                 break;
-            case 'Add employee':
+            case 'add employee':
                 addEmployee();
                 break;
-            case 'View departments':
+            case 'view departments':
                 viewDepartments();
                 break;
-            case 'View roles':
+            case 'view roles':
                 viewRoles();
                 break;
-            case 'View employees':
+            case 'view employees':
                 viewEmployees();
                 break;
-            case 'Update employee role':
+            case 'update employee role':
                 updateEmployeeRole();
                 break;
-            case 'Exit':
-                Exit();
+            case 'exit':
+                exit();
                 break;                            
         }
     });
 };
+
+function addDepartment() {
+    inquirer
+    .prompt({
+        type: 'input',
+        name: 'addDepartment',
+        message: "What is the department name?"
+    })
+    .then((answer) => {
+        connection.query(`INSERT INTO department(name)
+        VALUES("${answer.addDepartment}")`, (err, res) => {
+            if (err) throw err;
+            console.log(res);
+            start();
+        })
+    })
+
+
+};
+
+function addRole() {
+    inquirer
+    .prompt([
+    {
+        type: 'input',
+        name: 'title',
+        message: "What is the employees title?"
+    },
+    {
+        type: 'input',
+        name: 'salary',
+        message: "what is the salary?"
+    },
+    {
+        type: 'input',
+        name: 'deparment_id',
+        message: "What is the department Id?"
+    },     
+    ])
+    .then((answer) => {
+        connection.query(`INSERT INTO role(title, salary, department_id)
+        VALUES("${answer.title}", "${answer.salary}", "${answer.department_id}")`, (err,res) => {
+            if (err) throw err;
+            console.log(res);
+            start();
+        })
+    })
+};
+
+function viewDepartments() {
+
+}
