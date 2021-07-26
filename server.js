@@ -118,7 +118,7 @@ function addEmployee() {
         {
             type: 'input',
             name: 'role_id',
-            message: "What is employee role Id?"
+            message: "What is employee department Id?"
         },
     ])
     .then((answer) => {
@@ -158,9 +158,29 @@ function viewEmployees() {
 };
 
 function updateEmployeeRole() {
-
-
+    inquirer
+    .prompt([
+        {
+            type: 'input',
+            name: 'id',
+            message: "What is the employee Id?"
+        },
+        {
+            type: 'input',
+            name: 'role_id',
+            message: "What is employee new department Id?"
+        },
+    ])
+    .then((answer) => {
+        connection.query(`UPDATE employee SET role_id = ${answer.role_id} WHERE id = ${answer.id};`, (err,res) => {
+            if (err) throw err;
+            console.log(res);
+            start();
+        })
+    })
     
-    connection.query(``)
+};    
 
-}
+
+
+
