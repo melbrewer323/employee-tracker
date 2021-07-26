@@ -174,13 +174,16 @@ function updateEmployeeRole() {
     .then((answer) => {
         connection.query(`UPDATE employee SET role_id = ${answer.role_id} WHERE id = ${answer.id};`, (err,res) => {
             if (err) throw err;
-            console.log(res);
+            console.table(res);
             start();
         })
     })
     
 };    
 
+function exit() {
+    connection.end();
+};
 
 
 
