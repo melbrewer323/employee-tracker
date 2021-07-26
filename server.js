@@ -157,4 +157,10 @@ function viewEmployees() {
     })
 };
 
-// function updateEmployeeRole()
+function updateEmployeeRole() {
+
+
+    
+    connection.query(``)
+
+}
